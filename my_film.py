@@ -1,3 +1,8 @@
+#!/usr/bin/python3 env
+# -*- coding: utf8 -*-
+#import lib
+import webbrowser
+from colored import fore, back, style
 import requests
 from inscriptis import get_text
 import sys
@@ -7,10 +12,20 @@ import re
 import wget
 import os
 from urlextract import URLExtract
+from bs4 import BeautifulSoup as BS
+import urllib
+from lxml import etree
+from lxml import html
+import string
+
+
+
+
 def print_slow_3(words):
     str(words)
+    words = fore.GREEN + back.BLACK + words +style.RESET
     for char in str(words):
-        sleep(0.05)
+        sleep(0.04)
         sys.stdout.write(char)
         sys.stdout.flush()
         char.replace("%","")
@@ -36,7 +51,9 @@ def Points():
 #         sleep(1)
 #         print("About the movie\n\n","IMdb",urls_point,"\n\n")
 
-print_slow_3("Diba movie Download new film ;(  ")
+print_slow_3(fore.GREEN + back.BLUE +"                   [+]Diba movie[+]      "+style.RESET)
+
+os.system("clear")
 
 
 def film():
@@ -62,13 +79,13 @@ def film():
         ddr = ddr.replace("'","")
         string_txt = get_text(string)
         sleep(1)
-        print("\n\n",string_txt,"\n\nurl -->",ddr, "\n\n")
+        print("\n",string_txt,"\n\nurl -->",ddr, "\n\n")
 def movie():
-
     link = requests.get("http://mydiba.link")
     url = link.text
     soup = BeautifulSoup(url, "html.parser")
     link_movie_pints = soup.find_all('article' , class_="movie")
+    soup.find('div', class_="ages").decompose()
     for point in link_movie_pints:
         show_link = point.find_all('h2' , class_="post-titles")
         extractor = URLExtract()
@@ -84,10 +101,10 @@ def movie():
         d_tir = ddr
         sleep(1)
 
-        print("\n\n","About the movie\n\n","Link :-->",ddr,"\n\n",urls_point,"\n")
+        print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +ddr+style.RESET,"\n",fore.WHITE+ back.BLACK +urls_point+style.RESET,"\n")
     ##############################################################################3
-        dl = input("Select iteme \n\n1-Download type(dl)\n2-Next_Movie type(n) \n3-exit type(exit)\n\n   Please Type : ")
-        if dl == "dl":
+        dl = input("Select iteme  \n1-[d] Download \n2-[N] Next_Movie\n3-[e] exit\n4-[s] Serial Playing\n5-[t] Triler Movie\n--------------------------->>> option: ")
+        if dl == "d":
             extractor_dl = URLExtract()
             url_dl = requests.get(ddr)
             url_new_dl = url_dl.text
@@ -107,29 +124,90 @@ def movie():
                     print(ddr_db)
                     sleep(1)
                     os.system("mkdir  Diba_movie")
+                    print("link download: ->", ddr_db)
                     wget.download(ddr_db)
                     os.system("mv *.mkv /Diba_movie")
-        if dl == "n":
+        if dl == "n" or dl == "N":
             pass
 
-        if dl == "exit":
+        if dl == "exit" or dl == "e":
             sys.exit()
 
-        if dl == "tir":
-            extractor_dl = URLExtract()
-            tir = requests.get(d_tir)
-            sleep(10)
-            tir_text = tir.text
+        if dl == "t":
+            #triler Movie
+            extractor = URLExtract()
+            req = requests.get(ddr)
+            tree = html.fromstring(req.text)
+            req_t = req.text
+            soup_tir = BeautifulSoup(req_t, "lxml")
+            data_mv  = soup_tir.find('div', class_="-video")
+            dn  = data_mv
+            dn = str(dn)
+            tri_link =extractor.find_urls(dn)
+            tri_link = str(tri_link)
+            dop = tri_link.replace("[","")
+            dop_1 = dop.replace("]","")
+            dop_2 = dop_1.replace("'","")
+            dop_3 = re.findall('http://tr.*\.mp4', dop_2)
+            # down_tt = tri_link.endswith('.mp4')
+            dop_4 = str(dop_3)
+            dop_4 = dop_4.replace("[","")
+            dop_4 = dop_4.replace("]","")
+            dop_4 = dop_4.replace("'","")
+            os.system("mpv "+dop_4)
 
-            soup = BeautifulSoup(tir_text, "html.parser")
+
+            sleep(5)
+
+        if dl == "s":
+            os.system("clear")
+            extractor = URLExtract()
+            #Serial
+            Serial = requests.get("http://mydiba.link/series/?status=1&order=1")
+            Serial_str = Serial.text
+            soup_serial = BeautifulSoup(Serial_str, "html.parser")
+            data_serial =soup_serial.find_all('a' , class_="col-xs-6 no-padding arch_series_fix")
+
+            for ser in data_serial:
+                rateser = ser.find('p', class_="rateser")
+                name = ser.find('p', class_="titser")
+                kifi = ser.find('p', class_="ser_q")
+                dete = ser.find('p', class_="left ticks")
+                updtsr = ser.find('p', class_="updtsr")
+
+                str_rateser = str(rateser)
+                str_rateser = get_text(str_rateser)
+                str_name = str(name)
+                str_name = get_text(str_name)
+                str_dete = str(dete)
+                str_dete = get_text(str_dete)
+                str_kifi = str(kifi)
+                str_kifi = get_text(str_kifi)
+                str_updtsr = str(updtsr)
+                str_updtsr = get_text(str_updtsr)
+                ser.find('img', class_="serimg").decompose()
+                ser_str = str(ser)
+                done_serial = get_text(ser_str)
+                url_serial = extractor.find_urls(ser_str)
+                url_serial = str(url_serial)
+                url_serial = url_serial.replace("]" , "")
+                url_serial = url_serial.replace("[" , "")
+                url_serial = url_serial.replace("'" , "")
 
 
-            link_t =  soup.find_all('p', class_="text-justify")
+
+                print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +url_serial+style.RESET,"\n",fore.BLUE + back.BLACK +str_name+style.RESET,"\n\npoints: ⤵️",str_rateser,"\n\nQuality: ⤵️",str_kifi,"\n\nDate: ⤵️",str_dete,"\n\nSection: ⤵️",str_updtsr)
+                dl_serial = input("\n\nSelect iteme\n[n] Next Movie\n[e] Exit\n[o] Open link    \n\noption: ")
+
+                os.system('clear')
+                if dl_serial == "e":
+                    sys.exit()
+                if dl_serial == "o":
+                    webbrowser.open(url_serial)
 
 
 
-            print(link_t)
-            sleep(60)
+
 
     extractor = URLExtract()
     link = requests.get("http://mydiba.link/top-250-imdb/")
