@@ -7,5 +7,7 @@
 - chmod +x install.sh
 - sudo su
 - ./install.sh
+- chmod +x my_movie.py 
+- ./my_movie.py 
 
 
