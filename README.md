@@ -1,8 +1,10 @@
 # diba movie
-
+## about :
 You can check out the Diablo Movie site with this script
+You can view the serials and movies trailer with this script. You can also download videos.
+
 ### installing :
-- chmod install.sh
+- chmod +x install.sh
 - sudo su
 - ./install.sh
 
