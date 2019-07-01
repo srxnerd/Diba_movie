@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
 #import lib
+
+import pyfiglet
 import webbrowser
 from colored import fore, back, style
 import requests
@@ -12,9 +14,9 @@ import re
 import wget
 import os
 from urlextract import URLExtract
-from lxml import etree
 from lxml import html
 
+sleep(4)
 def print_slow_3(words):
     str(words)
     words = fore.GREEN + back.BLACK + words +style.RESET
@@ -80,14 +82,18 @@ def movie():
         ddr = ddr.replace("'","")
         d_tir = ddr
         sleep(1)
+        ddr_center= str(urls_point)
+        dfd = ddr_center
+        ascii_banner = pyfiglet.figlet_format("                                        STI NERD ",font='digital')
+        print(fore.RED+ back.BLACK +ascii_banner+style.RESET)
+        print(fore.RED + back.BLACK +"            [---]                       [#]   PGS   [#]                    [---]"+style.RESET)
+        print(fore.RED + back.BLACK +"            [---]                 ~ github.com / stinerd  ~                [---]"+style.RESET)
+        print(fore.RED + back.BLACK +"            [---]                ~ Welcome to  Diba Movie ~                [---]"+style.RESET)
+        print(fore.RED + back.BLACK +"            [---]______________________Linux for life______________________[---]\n\n"+style.RESET)
+        print("\n__________________________________________________________________________________\n")
+        print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +ddr+style.RESET,"\n__________________________________________________________________________________","\n",fore.WHITE+ back.BLACK +dfd+style.RESET,"\n")
 
-        print(fore.RED + back.BLACK +"[---]                       [#]   PGS   [#]                    [---]"+style.RESET)
-        print(fore.RED + back.BLACK +"[---]                 ~ github.com / stinerd  ~                [---]"+style.RESET)
-        print(fore.RED + back.BLACK +"[---]                ~ Welcome to  Diba Movie ~                [---]"+style.RESET)
-        print(fore.RED + back.BLACK +"[---]______________________Linux for life______________________[---]\n\n"+style.RESET)
-        print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +ddr+style.RESET,"\n",fore.WHITE+ back.BLACK +urls_point+style.RESET,"\n")
-
-        print(fore.CYAN + back.BLACK +"______________________________________________________________________\n")
+        print(fore.CYAN + back.BLACK +"_____________________________________________________________________________________\n")
         dl = input("Select iteme  \n1) [d] Download \n2) [N] Next_Movie\n3) [e] exit\n4) [s] Serial Playing\n5) [t] Triler Movie\n________________________________\n\n[#] -> ")
         if dl == "d":
             extractor_dl = URLExtract()
@@ -134,13 +140,25 @@ def movie():
             dop = tri_link.replace("[","")
             dop_1 = dop.replace("]","")
             dop_2 = dop_1.replace("'","")
-            dop_3 = re.findall('http://tr.*\.mp4', dop_2)
-            # down_tt = tri_link.endswith('.mp4')
-            dop_4 = str(dop_3)
-            dop_4 = dop_4.replace("[","")
-            dop_4 = dop_4.replace("]","")
-            dop_4 = dop_4.replace("'","")
-            os.system("mpv "+dop_4)
+            try:
+                dop_3 = re.findall('http://tr.*\.mp4', dop_2)
+                dop_6 = re.findall('http://dl.*\.mp4', dop_2)
+                # down_tt = tri_link.endswith('.mp4')
+                dop_4 = str(dop_3)
+                dop_4 = dop_4.replace("[","")
+                dop_4 = dop_4.replace("]","")
+                dop_4 = dop_4.replace("'","")
+                dop_5 = str(dop_6)
+                dop_5 = dop_5.replace("[","")
+                dop_5 = dop_5.replace("]","")
+                dop_5 = dop_5.replace("'","")
+                print(dop_4)
+                os.system("mpv "+dop_4)
+                os.system("mpv "+dop_5)
+                os.system("clear")
+            except:
+                print("ERROR Connect")
+
 
 
             sleep(5)
@@ -180,11 +198,15 @@ def movie():
                 url_serial = url_serial.replace("[" , "")
                 url_serial = url_serial.replace("'" , "")
 
-
-
+                print(fore.RED + back.BLACK +"             [---]----------------------------------------------------------[---]"+style.RESET)
+                print(fore.RED + back.BLACK +"             [---]                       [#]   PGS   [#]                    [---]"+style.RESET)
+                print(fore.RED + back.BLACK +"             [---]                 ~ github.com / stinerd  ~                [---]"+style.RESET)
+                print(fore.RED + back.BLACK +"             [---]                ~ Welcome to  Diba Movie ~                [---]"+style.RESET)
+                print(fore.RED + back.BLACK +"             [---]______________________Linux for life______________________[---]\n\n"+style.RESET)
                 print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +url_serial+style.RESET,"\n",fore.BLUE + back.BLACK +str_name+style.RESET,"\n\npoints: ⤵️",str_rateser,"\n\nQuality: ⤵️",str_kifi,"\n\nDate: ⤵️",str_dete,"\n\nSection: ⤵️",str_updtsr)
+
                 print(fore.CYAN + back.BLACK +"______________________________________________________________________\n")
-                dl_serial = input("\n\nSelect iteme\n1) [n] Next Movie\n2) [e] Exit\n3) [o] Open link\n4) [t] Triler Serial    \n\n[#] ->  ") 
+                dl_serial = input("\n\nSelect iteme\n1) [n] Next Movie\n2) [e] Exit\n3) [o] Open link\n4) [t] Triler Serial    \n\n[#] ->  ")
                 os.system('clear')
                 if dl_serial == "e":
                     sys.exit()
@@ -205,6 +227,7 @@ def movie():
                     ser_dd = re.findall('http.*\.1080p.WEB-DL.6CH.DibaMovie.mkv', dop_2)
                     print(ser_dd)
                     sleep(2)
+
                 if dl_serial == "t":
 
                     extractor = URLExtract()
@@ -227,6 +250,7 @@ def movie():
                     dop_4 = dop_4.replace("]","")
                     dop_4 = dop_4.replace("'","")
                     os.system("mpv "+dop_4)
+                    os.system("clear")
 
 
 
