@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/env bash 
 
 if [ $EUID != 0 ];then
-        echo "please run as root"
-        exit
+        echo "Please run script as root"
+        exit -1
 fi
 pip3 install lxml
 pip3 install bs4
