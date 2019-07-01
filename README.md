@@ -7,10 +7,11 @@
 - You can view the serials and movies trailer with this script. You can also download videos.
 
 ### installing :
-- chmod +x install.sh
-- sudo su
-- ./install.sh
-- chmod +x my_movie.py 
-- ./my_movie.py 
+- `git clone https://github.com/stinerd/Diba_movie.git`
+- `chmod +x install.sh`
+- `sudo su`
+- `./install.sh`
+- `chmod +x my_movie.py` 
+- `./my_movie.py` 
 
 
