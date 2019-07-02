@@ -69,7 +69,6 @@ def movie_serial_All_DATA():
                     ddr_db = ddr_db.replace("]","")
                     ddr_db = ddr_db.replace("'","")
                     print(ddr_db)
-                    sleep(1)
                     os.system("mkdir  Diba_movie")
                     print("link download: ->", ddr_db)
                     wget.download(ddr_db)
@@ -106,10 +105,6 @@ def movie_serial_All_DATA():
                 os.system("clear")
             except:
                 print("ERROR Connect")
-
-
-
-            sleep(5)
 
         if dl == "s":
             os.system("clear")
