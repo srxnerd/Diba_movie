@@ -11,3 +11,4 @@ pip3 install requests
 pip3 install inscriptis
 pip3 install urlextract
 pip3 install colored
+pip3 install pyfiglet

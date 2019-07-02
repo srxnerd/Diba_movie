@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
-#import lib
 
+
+
+#import lib
 import pyfiglet
 import webbrowser
 from colored import fore, back, style
@@ -15,9 +17,6 @@ import wget
 import os
 from urlextract import URLExtract
 from lxml import html
-import termios
-import struct
-import fcntl
 
 
 def movie_serial_All_DATA():
