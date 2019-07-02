@@ -15,60 +15,19 @@ import wget
 import os
 from urlextract import URLExtract
 from lxml import html
-
-sleep(4)
-def print_slow_3(words):
-    str(words)
-    words = fore.GREEN + back.BLACK + words +style.RESET
-    for char in str(words):
-        sleep(0.03)
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        char.replace("%","")
-
-def Points():
-    link = requests.get("http://mydiba.link")
-    url = link.text
-    soup = BeautifulSoup(url, "html.parser")
-    link_movie_pints = soup.find_all('div' , class_="post-infos-index")
-    for point in link_movie_pints:
-        point = str(point)
-        urls_point = get_text(point)
-        sleep(1)
-        print("About the movie\n\n","IMdb",urls_point,"\n\n")
-os.system("clear")
-def film():
-    extractor = URLExtract()
-    link = requests.get("http://mydiba.link")
-    url = link.text
-    soup = BeautifulSoup(url, "html.parser")
-    link_movie = soup.find_all('h2' , class_="post-titles")
-    link_movie_pints = soup.find_all('div' , class_="post-infos-index")
-    for point in link_movie_pints:
-        point = str(point)
-        urls_point = get_text(point)
+import termios
+import struct
+import fcntl
 
 
-    data = urls_point
-    print(data)
-    for name_movie in link_movie:
-        string = str(name_movie)
-        urls = extractor.find_urls(string)
-        dl_url = str(urls)
-        ddr = dl_url.replace("[","")
-        ddr = ddr.replace("]","")
-        ddr = ddr.replace("'","")
-        string_txt = get_text(string)
-        sleep(1)
-        print("\n",string_txt,"\n\nurl -->",ddr, "\n\n")
-def movie():
-
+def movie_serial_All_DATA():
     link = requests.get("http://mydiba.link")
     url = link.text
     soup = BeautifulSoup(url, "html.parser")
     link_movie_pints = soup.find_all('article' , class_="movie")
-    soup.find('div', class_="ages").decompose()
     for point in link_movie_pints:
+        soup.find('div', class_="ages").decompose()
+        soup.find('div', id="plot_posts").decompose()
         show_link = point.find_all('h2' , class_="post-titles")
         extractor = URLExtract()
         point = str(point)
@@ -81,20 +40,17 @@ def movie():
         ddr = ddr.replace("]","")
         ddr = ddr.replace("'","")
         d_tir = ddr
-        sleep(1)
         ddr_center= str(urls_point)
         dfd = ddr_center
-        ascii_banner = pyfiglet.figlet_format("                                        STI NERD ",font='digital')
+        ascii_banner = pyfiglet.figlet_format("                           Diba Movie                            ",font='bubble')
         print(fore.RED+ back.BLACK +ascii_banner+style.RESET)
-        print(fore.RED + back.BLACK +"            [---]                       [#]   PGS   [#]                    [---]"+style.RESET)
         print(fore.RED + back.BLACK +"            [---]                 ~ github.com / stinerd  ~                [---]"+style.RESET)
-        print(fore.RED + back.BLACK +"            [---]                ~ Welcome to  Diba Movie ~                [---]"+style.RESET)
-        print(fore.RED + back.BLACK +"            [---]______________________Linux for life______________________[---]\n\n"+style.RESET)
-        print("\n__________________________________________________________________________________\n")
+        print(fore.RED + back.BLACK +"            [---]______________________Linux for life______________________[---]"+style.RESET)
+        print("__________________________________________________________________________________\n")
         print(fore.GREEN + back.BLACK +"Link :-->"+style.RESET,fore.RED+ back.BLACK +ddr+style.RESET,"\n__________________________________________________________________________________","\n",fore.WHITE+ back.BLACK +dfd+style.RESET,"\n")
 
-        print(fore.CYAN + back.BLACK +"_____________________________________________________________________________________\n")
-        dl = input("Select iteme  \n1) [d] Download \n2) [N] Next_Movie\n3) [e] exit\n4) [s] Serial Playing\n5) [t] Triler Movie\n________________________________\n\n[#] -> ")
+        print(fore.CYAN + back.BLACK +"__________________________________________________________________________________\n")
+        dl = input("Select iteme  \n1) [d] Download \n2) [N] Next_Movie\n3) [e] exit\n4) [s] Serial Playing\n5) [t] Triler Movie\n______________________\n\n[#] -> ")
         if dl == "d":
             extractor_dl = URLExtract()
             url_dl = requests.get(ddr)
@@ -141,20 +97,12 @@ def movie():
             dop_1 = dop.replace("]","")
             dop_2 = dop_1.replace("'","")
             try:
-                dop_3 = re.findall('http://tr.*\.mp4', dop_2)
-                dop_6 = re.findall('http://dl.*\.mp4', dop_2)
-                # down_tt = tri_link.endswith('.mp4')
+                dop_3 = re.findall('http://.*\.mp4', dop_2)
                 dop_4 = str(dop_3)
                 dop_4 = dop_4.replace("[","")
                 dop_4 = dop_4.replace("]","")
                 dop_4 = dop_4.replace("'","")
-                dop_5 = str(dop_6)
-                dop_5 = dop_5.replace("[","")
-                dop_5 = dop_5.replace("]","")
-                dop_5 = dop_5.replace("'","")
-                print(dop_4)
                 os.system("mpv "+dop_4)
-                os.system("mpv "+dop_5)
                 os.system("clear")
             except:
                 print("ERROR Connect")
@@ -243,8 +191,7 @@ def movie():
                     dop = tri_link.replace("[","")
                     dop_1 = dop.replace("]","")
                     dop_2 = dop_1.replace("'","")
-                    dop_3 = re.findall('http://tr.*\.mp4', dop_2)
-                    # down_tt = tri_link.endswith('.mp4')
+                    dop_3 = re.findall('http://.*\.mp4', dop_2)
                     dop_4 = str(dop_3)
                     dop_4 = dop_4.replace("[","")
                     dop_4 = dop_4.replace("]","")
@@ -252,18 +199,4 @@ def movie():
                     os.system("mpv "+dop_4)
                     os.system("clear")
 
-
-
-
-
-
-    extractor = URLExtract()
-    link = requests.get("http://mydiba.link/top-250-imdb/")
-    url = link.text
-    soup = BeautifulSoup(url, "html.parser")
-    mydivs = soup.find_all('a', class_="bxof")
-    my = str(mydivs)
-    urls = extractor.find_urls(my)
-
-
-movie()
+movie_serial_All_DATA()
